@@ -3,6 +3,7 @@ package com.generali.userauthservice.user;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +31,7 @@ public class UserRestController {
     }
 
     @Operation(summary = "Get all registered users with their authorities", description = "All Users")
+    @SecurityRequirement(name = "Bearer Authentication")
     @ApiResponses({
             @ApiResponse(responseCode = "403", description = "Not valid credentials"),
             @ApiResponse(responseCode = "200", description = "Valid credentials and token returned")
