@@ -1,7 +1,7 @@
 
 
 // dziś, do sprawdzenia jutro
-- Zaimplementuj Swaggera w Order service (https://github.com/maciejburzynski/GeneraliJavaPL1)
+- Zaimplementuj Swaggera w Order app (https://github.com/maciejburzynski/GeneraliJavaPL1)
 - Odpowiednio udokumentuj wystawione Endpointy (+Authorization)
 - Dane wrażliwe (np. klucze) wrzuć za pomocą @Value
 - Spróbuj zaimplementować Flyway, usuń datainitializera.
