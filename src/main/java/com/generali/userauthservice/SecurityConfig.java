@@ -32,10 +32,10 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(request -> request
-                .requestMatchers(AntPathRequestMatcher.antMatcher("/api/token")).permitAll()
-                .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console")).permitAll()
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/api/login")).permitAll()
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/swagger-ui/**")).permitAll()
-                .anyRequest().permitAll());
+                .anyRequest().authenticated());
 
         httpSecurity.httpBasic(basic -> basic.disable());
         httpSecurity.formLogin(form -> form.disable());
