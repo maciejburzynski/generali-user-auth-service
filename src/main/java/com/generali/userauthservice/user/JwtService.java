@@ -40,6 +40,6 @@ public class JwtService {
                 .withExpiresAt(new Date(System.currentTimeMillis() + (10 * 60 * 1000))) // 10 minutes
                 .sign(algorithm);
 
-        return new UserLoginResponse(token);
+        return new UserLoginResponse(token, null);
     }
 }

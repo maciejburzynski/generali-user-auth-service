@@ -22,7 +22,11 @@ public class UserService {
     private final JwtService jwtService;
 
     UserLoginResponse validateUser(UserLoginRequest userLoginRequest) {
-        return jwtService.validateUserAndGenerateToken(userLoginRequest);
+        try {
+            return jwtService.validateUserAndGenerateToken(userLoginRequest);
+        } catch (RuntimeException exception){
+            return new UserLoginResponse(null, exception.getMessage());
+        }
     }
 
     public List<User> findAll() {
