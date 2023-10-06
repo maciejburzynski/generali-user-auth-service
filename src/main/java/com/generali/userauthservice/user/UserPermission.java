@@ -6,8 +6,8 @@ import lombok.Getter;
 public enum UserPermission {
     USER_AUTH_SERVICE_READ("user-auth-service:read"),
     USER_AUTH_SERVICE_WRITE("user-auth-service:write"),
-    APP1_READ("app1:read"),
-    APP1_WRITE("app1:write"),
+    MAIL_SERVICE_READ("mail-service:read"),
+    MAIL_SERVICE_WRITE("mail-service:write"),
     APP2_READ("app2:read"),
     APP2_WRITE("app2:write");
 

@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @Tag(name = "User API", description = "Login, register and getting users")
@@ -29,6 +31,7 @@ public class UserRestController {
     })
     @PostMapping("api/login")
     UserLoginResponse login(@RequestBody @Valid UserLoginRequest userLoginRequest) {
+        log.info("{} tries to log in", userLoginRequest.getUsername());
         return userService.validateUser(userLoginRequest);
     }
 
@@ -41,6 +44,7 @@ public class UserRestController {
 
     @GetMapping("api/users")
     Page<User> getAllUsers(@PageableDefault(size = 2) Pageable pageable) {
+        log.info("Getting all users");
         return userService.findAll(pageable);
     }
 }

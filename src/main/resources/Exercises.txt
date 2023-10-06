@@ -8,4 +8,5 @@
 - jeśli potrzebne, zastosuj @JsonInclude/@JsonIgnore
 
 // Paginacje/Stronicowanie
+- Dodaj paginację do method zwracających findAll() w pozostałych encjach
 
