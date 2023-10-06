@@ -7,10 +7,11 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -37,8 +38,9 @@ public class UserRestController {
             @ApiResponse(responseCode = "403", description = "Not valid credentials"),
             @ApiResponse(responseCode = "200", description = "Valid credentials and token returned")
     })
+
     @GetMapping("api/users")
-    List<User> getAllUsers() {
-        return userService.findAll();
+    Page<User> getAllUsers(@PageableDefault(size = 2) Pageable pageable) {
+        return userService.findAll(pageable);
     }
 }
