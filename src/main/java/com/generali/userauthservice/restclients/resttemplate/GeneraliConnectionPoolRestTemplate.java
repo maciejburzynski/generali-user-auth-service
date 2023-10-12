@@ -17,7 +17,6 @@ import java.io.IOException;
 @Slf4j
 public class GeneraliConnectionPoolRestTemplate {
 
-    RestTemplate restTemplate = new RestTemplate();
 
     @PostConstruct
     void executeConnectionPool() throws IOException {
