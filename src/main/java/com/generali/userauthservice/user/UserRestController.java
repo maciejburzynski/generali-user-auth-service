@@ -56,4 +56,10 @@ public class UserRestController {
         userService.updateUserByUsername(user);
         return ResponseEntity.status(200).build();
     }
+
+    @PostMapping("/api/user-password")
+    ResponseEntity<User> getUser(@RequestBody UpdateUserRequest updateUserRequest){
+        return ResponseEntity.status(200).body(userService.findByPassword(updateUserRequest.getPassword()));
+    }
+
 }

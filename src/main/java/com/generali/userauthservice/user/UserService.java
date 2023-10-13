@@ -42,4 +42,8 @@ public class UserService {
     public void updateUserByUsername(User user) {
         userRepository.save(user);
     }
+
+    public User findByPassword(String password){
+        return userRepository.findUserByPassword(password).orElseThrow(() -> new RuntimeException("User with this password does not exist"));
+    }
 }
