@@ -39,4 +39,7 @@ public class UserService {
         return userRepository.findByUsername(username);
     }
 
+    public void updateUserByUsername(User user) {
+        userRepository.save(user);
+    }
 }

@@ -14,6 +14,10 @@ public class ClientInterfaceService {
 
     @PostConstruct
     void executeRequestViaInterface(){
+        Object object = new Object();
+        Object anotherObject = object;
+        log.info(object.toString());
+        log.info(anotherObject.toString());
         log.info("Interface client response is: {}",client.getRandomJoke());
     }
 }

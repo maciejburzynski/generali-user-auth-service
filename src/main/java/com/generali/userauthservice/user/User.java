@@ -29,8 +29,6 @@ public class User extends BaseEntity implements UserDetails  {
     private boolean isAccountNonLocked;
     private boolean isCredentialsNonExpired;
     private boolean isEnabled;
-    @Embedded
-    private Address address;
 
 
 

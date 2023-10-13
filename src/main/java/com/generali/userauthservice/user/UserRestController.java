@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -46,5 +47,13 @@ public class UserRestController {
     Page<User> getAllUsers(@PageableDefault(size = 2) Pageable pageable) {
         log.info("Getting all users");
         return userService.findAll(pageable);
+    }
+
+    @PutMapping("/api/users")
+    ResponseEntity updateUserByUsername(@RequestBody UpdateUserRequest updateUserRequest) {
+        User user = userService.findByUsername(updateUserRequest.getUsername()).get();
+        user.setPassword(updateUserRequest.getPassword());
+        userService.updateUserByUsername(user);
+        return ResponseEntity.status(200).build();
     }
 }

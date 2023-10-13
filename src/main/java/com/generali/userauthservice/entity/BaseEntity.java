@@ -17,4 +17,6 @@ public abstract class BaseEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String uuid = UUID.randomUUID().toString();
+    @Version
+    private Integer version;
 }
