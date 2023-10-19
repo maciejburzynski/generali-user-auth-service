@@ -9,13 +9,10 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Slf4j
 @RestController
@@ -31,9 +28,21 @@ public class UserRestController {
             @ApiResponse(responseCode = "200", description = "Valid credentials and token returned")
     })
     @PostMapping("api/login")
-    UserLoginResponse login(@RequestBody @Valid UserLoginRequest userLoginRequest) {
-        log.info("{} tries to log in", userLoginRequest.getUsername());
-        return userService.validateUser(userLoginRequest);
+    UserLoginResponse login(@RequestBody @Valid UserDto userDto) {
+        log.info("{} tries to log in", userDto.getUsername());
+        return userService.validateUser(userDto);
+    }
+
+    @Operation(summary = "Register user into user-auth-service", description = "Register user")
+    @ApiResponses({
+            @ApiResponse(responseCode = "201", description = "Valid request executed and 201 returned")
+    })
+    @PostMapping("api/register")
+    ResponseEntity register(@RequestBody @Valid UserDto userDto) {
+        log.info("{} tries to register in", userDto.getUsername());
+        userService.registerUser(userDto);
+
+        return ResponseEntity.status(200).build();
     }
 
     @Operation(summary = "Get all registered users with their authorities", description = "All Users")

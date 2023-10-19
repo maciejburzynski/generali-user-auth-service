@@ -36,6 +36,7 @@ public class SecurityConfig {
     public SecurityFilterChain configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(request -> request
                 .requestMatchers(AntPathRequestMatcher.antMatcher( "/api/login")).permitAll()
+                .requestMatchers(AntPathRequestMatcher.antMatcher( "/api/register")).permitAll()
                 .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.PUT, "/api/users")).permitAll()
 //                .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/api/users")).permitAll()
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()

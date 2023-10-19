@@ -22,7 +22,7 @@ public class JwtService {
     @Value("${jwt.user-service.key:dupa}")
     private String KEY;
 
-    UserLoginResponse validateUserAndGenerateToken(UserLoginRequest request) {
+    UserLoginResponse validateUserAndGenerateToken(UserDto request) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 request.getUsername(),
                 request.getPassword()));

@@ -18,23 +18,23 @@ import java.io.IOException;
 public class GeneraliConnectionPoolRestTemplate {
 
 
-    @PostConstruct
-    void executeConnectionPool() throws IOException {
+//    @PostConstruct
+//    void executeConnectionPool() throws IOException {
 
 
-        PoolingHttpClientConnectionManager poolingHttpClientConnectionManager = new PoolingHttpClientConnectionManager();
-        poolingHttpClientConnectionManager.setMaxTotal(100);
-        poolingHttpClientConnectionManager.setDefaultMaxPerRoute(10);
+//        PoolingHttpClientConnectionManager poolingHttpClientConnectionManager = new PoolingHttpClientConnectionManager();
+//        poolingHttpClientConnectionManager.setMaxTotal(100);
+//        poolingHttpClientConnectionManager.setDefaultMaxPerRoute(10);
 
-        CloseableHttpClient client = HttpClients.custom()
-                .setConnectionManager(poolingHttpClientConnectionManager)
-                .build();
+//        CloseableHttpClient client = HttpClients.custom()
+//                .setConnectionManager(poolingHttpClientConnectionManager)
+//                .build();
 
-        CloseableHttpResponse closeableHttpResponse = client.execute(new HttpGet("https://official-joke-api.appspot.com/random_joke"));
-        String response = new BasicResponseHandler().handleResponse(closeableHttpResponse);
+//        CloseableHttpResponse closeableHttpResponse = client.execute(new HttpGet("https://official-joke-api.appspot.com/random_joke"));
+//        String response = new BasicResponseHandler().handleResponse(closeableHttpResponse);
 
-        log.info("Connection Pool response: {}",response);
+//        log.info("Connection Pool response: {}",response);
 
 
-    }
+//    }
 }

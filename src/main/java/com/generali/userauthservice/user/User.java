@@ -17,7 +17,6 @@ import java.util.UUID;
 @Entity
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 @Table(name = "USERS")
 public class User extends BaseEntity implements UserDetails  {
 
@@ -40,6 +39,13 @@ public class User extends BaseEntity implements UserDetails  {
         this.isEnabled = true;
         this.isCredentialsNonExpired = true;
         this.isAccountNonLocked = true;
+    }
+    public User() {
+        this.userRole = UserRole.USER;
+        this.isAccountNonExpired = false;
+        this.isEnabled = false;
+        this.isCredentialsNonExpired = false;
+        this.isAccountNonLocked = false;
     }
 
     @Override

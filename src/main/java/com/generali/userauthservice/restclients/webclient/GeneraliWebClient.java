@@ -14,30 +14,30 @@ public class GeneraliWebClient {
 
     WebClient webClient = WebClient.create();
 
-
-    @PostConstruct
-    void executeWebClientHttpRequest() {
-
-        Mono<String> stringMono = webClient.method(HttpMethod.GET)
-                .uri("https://official-joke-api.appspot.com/random_joke")
-                .cookie("cookie-name", "cookie-value")
-                .header("header-name", "header-value")
-                .retrieve()
-                .bodyToMono(String.class);
-
-        stringMono.subscribe(response -> log.info("WebClient Mono response is: {}", response));
-        log.info("1UMC UMC UMC UMC ");
-
-        Flux<String> stringFlux = webClient.method(HttpMethod.GET)
-                .uri("https://official-joke-api.appspot.com/random_joke")
-                .cookie("cookie-name", "cookie-value")
-                .header("header-name", "header-value")
-                .retrieve()
-                .bodyToFlux(String.class);
-
-        log.info("2UMC UMC UMC UMC");
-        stringFlux.subscribe(response -> log.info("WebClient Flux response is: {}", response));
-    }
+//
+//    @PostConstruct
+//    void executeWebClientHttpRequest() {
+//
+//        Mono<String> stringMono = webClient.method(HttpMethod.GET)
+//                .uri("https://official-joke-api.appspot.com/random_joke")
+//                .cookie("cookie-name", "cookie-value")
+//                .header("header-name", "header-value")
+//                .retrieve()
+//                .bodyToMono(String.class);
+//
+//        stringMono.subscribe(response -> log.info("WebClient Mono response is: {}", response));
+//        log.info("1UMC UMC UMC UMC ");
+//
+//        Flux<String> stringFlux = webClient.method(HttpMethod.GET)
+//                .uri("https://official-joke-api.appspot.com/random_joke")
+//                .cookie("cookie-name", "cookie-value")
+//                .header("header-name", "header-value")
+//                .retrieve()
+//                .bodyToFlux(String.class);
+//
+//        log.info("2UMC UMC UMC UMC");
+//        stringFlux.subscribe(response -> log.info("WebClient Flux response is: {}", response));
+//    }
   /*
   Sync
     User -------- Service
