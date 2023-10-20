@@ -15,6 +15,7 @@ public class UserService {
   private final UserRepository userRepository;
   private final JwtService jwtService;
   private final PasswordEncoder passwordEncoder;
+  private final UserActivationClient userActivationClient;
   UserMapper userMapper = UserMapper.INSTANCE;
 
   UserLoginResponse validateUser(UserDto userDto) {
@@ -45,5 +46,16 @@ public class UserService {
     User user = userMapper.mapDtoToEntity(userDto);
     user.setPassword(passwordEncoder.encode(userDto.getPassword()));
     userRepository.save(user);
+    userActivationClient.activateUser(user);
+  }
+
+  public User activateUser(String uuid) {
+    User userToActivate = userRepository.findUserByUuid(uuid).orElseThrow(() -> new UserNotFoundException("User with uuid: " + uuid + "not found"));
+    userToActivate.setEnabled(true);
+    userToActivate.setAccountNonExpired(true);
+    userToActivate.setAccountNonLocked(true);
+    userToActivate.setCredentialsNonExpired(true);
+    userRepository.save(userToActivate);
+    return userToActivate;
   }
 }

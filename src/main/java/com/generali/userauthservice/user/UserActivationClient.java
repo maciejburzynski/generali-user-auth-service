@@ -8,37 +8,44 @@ import java.net.http.HttpResponse;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import static java.net.URI.create;
 
-@Service
+@Component
 @Slf4j
 public class UserActivationClient {
 
   @Value("${mail-service.url}")
-  private String baseUrl;
-  private String url = baseUrl + "/api/mails";
+  private String mailServiceUrl;
+  @Value("${user-auth-service.url}")
+  private String userAuthServiceUrl;
 
 
-  void activateUser(User user) throws IOException, InterruptedException {
+  void activateUser(User user) {
     HttpClient httpClient = HttpClient.newHttpClient();
     HttpRequest httpRequest = HttpRequest
       .newBuilder()
+      .header("content-type", "application/json")
       .POST(HttpRequest.BodyPublishers.ofString(String.format(
         """
           {
           "receiver":"%s",
           "subject":"User activation",
-          "content":"Please activate user: %s"
+          "content":"Please activate user using the link: %s"
           }
-          """, user.getUsername()
+          """,
+        user.getUsername(),
+        userAuthServiceUrl + user.getUuid()
       )))
-      .uri(create(url))
+      .uri(create(mailServiceUrl))
       .build();
-    HttpResponse httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-
-
-    log.info(httpResponse.body().toString());
+    try {
+      HttpResponse httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    } catch (InterruptedException e) {
+      throw new RuntimeException(e);
+    }
   }
 }

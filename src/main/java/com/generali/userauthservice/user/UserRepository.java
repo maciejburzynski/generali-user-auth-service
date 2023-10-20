@@ -18,6 +18,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @QueryHints(@QueryHint(value = "3000", name = "jakarta.persistence.lock.timeout"))
     Optional<User> findUserByPassword(String password);
 
+  Optional<User> findUserByUuid(String uuid);
+
 //    @Query(value = "UPDATE USERS SET password= ?2 WHERE username= ?1", nativeQuery = true)
 //    @Modifying
 //    @Transactional

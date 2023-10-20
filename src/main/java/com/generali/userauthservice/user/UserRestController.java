@@ -42,6 +42,19 @@ public class UserRestController {
         log.info("{} tries to register in", userDto.getUsername());
         userService.registerUser(userDto);
 
+        return ResponseEntity.status(201).build();
+    }
+
+//    TODO: add field of activation uuid into user entity
+    @Operation(summary = "Activate user in user-auth-service", description = "Activate user")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Valid request executed and 200 returned")
+    })
+    @GetMapping("api/activate/{uuid}")
+    ResponseEntity activate(@PathVariable String uuid) {
+        log.info("UUID: {} trying to activate in", uuid);
+        User userToActivate = userService.activateUser(uuid);
+        log.info("user found: {}", userToActivate.toString());
         return ResponseEntity.status(200).build();
     }
 
