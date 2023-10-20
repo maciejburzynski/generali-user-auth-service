@@ -1,8 +1,7 @@
 package com.generali.userauthservice;
 
-import com.generali.userauthservice.user.JwtFilter;
+import com.generali.userauthservice.jwt.JwtFilter;
 import com.generali.userauthservice.user.UserRepository;
-import com.generali.userauthservice.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -40,7 +39,6 @@ public class SecurityConfig {
                 .requestMatchers(AntPathRequestMatcher.antMatcher( "/api/activate/*")).permitAll()
                 .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/api/users")).authenticated()
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
-                .requestMatchers(AntPathRequestMatcher.antMatcher("/api/user-password")).permitAll()
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/swagger-ui/**")).permitAll()
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/swagger-ui.html")).permitAll()
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/v3/api-docs/**")).permitAll()

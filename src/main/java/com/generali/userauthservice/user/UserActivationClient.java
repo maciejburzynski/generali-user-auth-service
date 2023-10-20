@@ -5,7 +5,10 @@ import java.io.IOException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Base64;
 
+import com.generali.userauthservice.jwt.JwtCache;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -14,6 +17,7 @@ import static java.net.URI.create;
 
 @Component
 @Slf4j
+@RequiredArgsConstructor
 public class UserActivationClient {
 
   @Value("${mail-service.url}")
@@ -21,12 +25,14 @@ public class UserActivationClient {
   @Value("${user-auth-service.url}")
   private String userAuthServiceUrl;
 
+  private final JwtCache jwtCache;
 
   void activateUser(User user) {
     HttpClient httpClient = HttpClient.newHttpClient();
     HttpRequest httpRequest = HttpRequest
       .newBuilder()
       .header("content-type", "application/json")
+      .header("Authorization","Bearer " + jwtCache.getToken())
       .POST(HttpRequest.BodyPublishers.ofString(String.format(
         """
           {
@@ -42,6 +48,7 @@ public class UserActivationClient {
       .build();
     try {
       HttpResponse httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+      log.info(httpResponse.toString());
     } catch (IOException e) {
       throw new RuntimeException(e);
     } catch (InterruptedException e) {

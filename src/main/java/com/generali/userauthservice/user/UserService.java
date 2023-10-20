@@ -2,6 +2,7 @@ package com.generali.userauthservice.user;
 
 import java.util.Optional;
 
+import com.generali.userauthservice.jwt.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -32,14 +33,6 @@ public class UserService {
 
   public Optional<User> findByUsername(String username) {
     return userRepository.findByUsername(username);
-  }
-
-  public void updateUserByUsername(User user) {
-    userRepository.save(user);
-  }
-
-  public User findByPassword(String password) {
-    return userRepository.findUserByPassword(password).orElseThrow(() -> new RuntimeException("User with this password does not exist"));
   }
 
   public void registerUser(UserDto userDto) {
