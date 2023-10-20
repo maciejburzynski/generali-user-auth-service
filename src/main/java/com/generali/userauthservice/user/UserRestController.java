@@ -29,7 +29,7 @@ public class UserRestController {
     })
     @PostMapping("api/login")
     UserLoginResponse login(@RequestBody @Valid UserDto userDto) {
-        log.info("{} tries to log in", userDto.getUsername());
+        log.info("{} trying to log in", userDto.getUsername());
         return userService.validateUser(userDto);
     }
 
@@ -39,9 +39,8 @@ public class UserRestController {
     })
     @PostMapping("api/register")
     ResponseEntity register(@RequestBody @Valid UserDto userDto) {
-        log.info("{} tries to register in", userDto.getUsername());
+        log.info("{} trying to register in", userDto.getUsername());
         userService.registerUser(userDto);
-
         return ResponseEntity.status(201).build();
     }
 
@@ -64,24 +63,9 @@ public class UserRestController {
             @ApiResponse(responseCode = "403", description = "Not valid credentials"),
             @ApiResponse(responseCode = "200", description = "Valid credentials and token returned")
     })
-
     @GetMapping("api/users")
     Page<User> getAllUsers(@PageableDefault(size = 2) Pageable pageable) {
         log.info("Getting all users");
         return userService.findAll(pageable);
     }
-
-    @PutMapping("/api/users")
-    ResponseEntity updateUserByUsername(@RequestBody UpdateUserRequest updateUserRequest) {
-        User user = userService.findByUsername(updateUserRequest.getUsername()).get();
-        user.setPassword(updateUserRequest.getPassword());
-        userService.updateUserByUsername(user);
-        return ResponseEntity.status(200).build();
-    }
-
-    @PostMapping("/api/user-password")
-    ResponseEntity<User> getUser(@RequestBody UpdateUserRequest updateUserRequest){
-        return ResponseEntity.status(200).body(userService.findByPassword(updateUserRequest.getPassword()));
-    }
-
 }
