@@ -20,7 +20,7 @@ import static java.net.URI.create;
 @RequiredArgsConstructor
 public class UserActivationClient {
 
-<<<<<<< HEAD
+
   @Value("${user-auth-service.url}")
   private String userAuthServiceUrl;
 
@@ -30,25 +30,15 @@ public class UserActivationClient {
   private String mailServiceUsername;
   @Value("${mail-service.password}")
   private String mailServicePassword;
-=======
-  @Value("${mail-service.url}")
-  private String mailServiceUrl;
-  @Value("${user-auth-service.url}")
-  private String userAuthServiceUrl;
 
   private final JwtCache jwtCache;
->>>>>>> 850a6a326d91534959a637e7eb7d1c0a81a1f3ba
 
   void activateUser(User user) {
     HttpClient httpClient = HttpClient.newHttpClient();
     HttpRequest httpRequest = HttpRequest
       .newBuilder()
       .header("content-type", "application/json")
-<<<<<<< HEAD
       .header("Authorization","Basic " + Base64.getEncoder().encodeToString((mailServiceUsername+":"+mailServicePassword).getBytes()))
-=======
-      .header("Authorization","Bearer " + jwtCache.getToken())
->>>>>>> 850a6a326d91534959a637e7eb7d1c0a81a1f3ba
       .POST(HttpRequest.BodyPublishers.ofString(String.format(
         """
           {
