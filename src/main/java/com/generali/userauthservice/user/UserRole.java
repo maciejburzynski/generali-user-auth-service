@@ -20,7 +20,7 @@ public enum UserRole {
         this.permissions = permissions;
     }
 
-    List<SimpleGrantedAuthority> getGrantedAuthorities() {
+    public List<SimpleGrantedAuthority> getGrantedAuthorities() {
         List<SimpleGrantedAuthority> authorities = permissions.stream()
                 .map(permission -> new SimpleGrantedAuthority(permission.getPermission()))
                 .collect(Collectors.toList());

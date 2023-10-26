@@ -11,13 +11,13 @@ import org.springframework.stereotype.Service;
 public class ClientInterfaceService {
 
     private final IJokeClient client;
-
-    @PostConstruct
-    void executeRequestViaInterface(){
-        Object object = new Object();
-        Object anotherObject = object;
-        log.info(object.toString());
-        log.info(anotherObject.toString());
-        log.info("Interface client response is: {}",client.getRandomJoke());
-    }
+//
+//    @PostConstruct
+//    void executeRequestViaInterface(){
+//        Object object = new Object();
+//        Object anotherObject = object;
+//        log.info(object.toString());
+//        log.info(anotherObject.toString());
+//        log.info("Interface client response is: {}",client.getRandomJoke());
+//    }
 }

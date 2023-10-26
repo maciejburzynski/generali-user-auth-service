@@ -4,10 +4,10 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
-public class UserLoginRequest {
+public class UserDto {
 
     @NotBlank(message = "Username must not be blank")
-    private String Username;
+    private String username;
     @NotBlank(message = "Username must not be blank")
-    private String Password;
+    private String password;
 }

@@ -1,7 +1,10 @@
-package com.generali.userauthservice.user;
+package com.generali.userauthservice.jwt;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.generali.userauthservice.user.User;
+import com.generali.userauthservice.user.UserDto;
+import com.generali.userauthservice.user.UserLoginResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,7 +25,7 @@ public class JwtService {
     @Value("${jwt.user-service.key:dupa}")
     private String KEY;
 
-    UserLoginResponse validateUserAndGenerateToken(UserLoginRequest request) {
+    public UserLoginResponse validateUserAndGenerateToken(UserDto request) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 request.getUsername(),
                 request.getPassword()));

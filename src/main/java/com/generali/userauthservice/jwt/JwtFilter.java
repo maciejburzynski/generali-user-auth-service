@@ -1,4 +1,4 @@
-package com.generali.userauthservice.user;
+package com.generali.userauthservice.jwt;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
@@ -8,6 +8,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -21,11 +22,13 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Component
+@RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
 
     @Value("${jwt.user-service.key:dupa}")// default - dupa
     private String KEY;
 
+    private final JwtCache jwtCache;
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String jwtHeaderOrCookieName = "Authorization";
@@ -47,8 +50,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(jwt.getSubject(), null, permissionsList);
         SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-
-
+        jwtCache.setToken(token);
         filterChain.doFilter(request, response);
     }
 }
