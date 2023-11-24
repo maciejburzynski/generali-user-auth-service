@@ -14,6 +14,8 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequiredArgsConstructor
@@ -64,8 +66,8 @@ public class UserRestController {
             @ApiResponse(responseCode = "200", description = "Valid credentials and token returned")
     })
     @GetMapping("api/users")
-    Page<User> getAllUsers(@PageableDefault(size = 2) Pageable pageable) {
+    List<User> getAllUsers() {
         log.info("Getting all users");
-        return userService.findAll(pageable);
+        return userService.findAll();
     }
 }

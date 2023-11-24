@@ -1,5 +1,6 @@
 package com.generali.userauthservice.user;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.generali.userauthservice.jwt.JwtService;
@@ -27,8 +28,13 @@ public class UserService {
     }
   }
 
-  public Page<User> findAll(Pageable pageable) {
-    return userRepository.findAll(pageable);
+  public List<User> findAll() {
+    UserSpecification userSpecification = new UserSpecification();
+    userSpecification.add(new SearchCriteria("username", "user", SearchOperation.EQUAL));
+    return userRepository.findAll(userSpecification);
+
+
+
   }
 
   public Optional<User> findByUsername(String username) {

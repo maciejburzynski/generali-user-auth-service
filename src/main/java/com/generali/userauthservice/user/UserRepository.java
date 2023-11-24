@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificationExecutor<User> {
 
     Optional<User> findByUsername(String username);
 
@@ -19,6 +19,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findUserByPassword(String password);
 
   Optional<User> findUserByUuid(String uuid);
+
 
 //    @Query(value = "UPDATE USERS SET password= ?2 WHERE username= ?1", nativeQuery = true)
 //    @Modifying
