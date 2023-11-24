@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<userList>
+    <user>
+        <sentAt>24-11-2023 15:51:19:364444</sentAt>
+        <username>user</username>
+        <mail>user@gmail.com</mail>
+    </user>
+    <user>
+        <sentAt>24-11-2023 15:51:19:364494</sentAt>
+        <username>admin</username>
+        <mail>user@gmail.com</mail>
+    </user>
+    <user>
+        <sentAt>24-11-2023 15:51:19:364509</sentAt>
+        <username>superadmin</username>
+        <mail>user@gmail.com</mail>
+    </user>
+</userList>

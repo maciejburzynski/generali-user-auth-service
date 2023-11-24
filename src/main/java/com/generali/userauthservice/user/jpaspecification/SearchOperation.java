@@ -1,4 +1,4 @@
-package com.generali.userauthservice.user;
+package com.generali.userauthservice.user.jpaspecification;
 
 public enum SearchOperation {
 

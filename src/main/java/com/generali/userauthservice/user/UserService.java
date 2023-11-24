@@ -4,6 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import com.generali.userauthservice.jwt.JwtService;
+import com.generali.userauthservice.user.jpaspecification.SearchCriteria;
+import com.generali.userauthservice.user.jpaspecification.SearchOperation;
+import com.generali.userauthservice.user.jpaspecification.UserRepository;
+import com.generali.userauthservice.user.jpaspecification.UserSpecification;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -28,12 +32,12 @@ public class UserService {
     }
   }
 
-  public List<User> findAll() {
+  public Page<User> findAll(Pageable pageable) {
+
     UserSpecification userSpecification = new UserSpecification();
-    userSpecification.add(new SearchCriteria("username", "user", SearchOperation.EQUAL));
-    return userRepository.findAll(userSpecification);
+    userSpecification.add(new SearchCriteria("username", List.of("user", "superadmin"), SearchOperation.IN));
 
-
+    return userRepository.findAll(userSpecification, pageable);
 
   }
 

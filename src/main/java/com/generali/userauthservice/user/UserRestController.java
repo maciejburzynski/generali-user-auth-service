@@ -66,8 +66,8 @@ public class UserRestController {
             @ApiResponse(responseCode = "200", description = "Valid credentials and token returned")
     })
     @GetMapping("api/users")
-    List<User> getAllUsers() {
+    Page<User> getAllUsers(@PageableDefault(size = 2) Pageable pageable) {
         log.info("Getting all users");
-        return userService.findAll();
+        return userService.findAll(pageable);
     }
 }

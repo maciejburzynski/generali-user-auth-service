@@ -1,7 +1,7 @@
 package com.generali.userauthservice;
 
 import com.generali.userauthservice.jwt.JwtFilter;
-import com.generali.userauthservice.user.UserRepository;
+import com.generali.userauthservice.user.jpaspecification.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

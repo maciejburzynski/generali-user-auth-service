@@ -1,5 +1,6 @@
-package com.generali.userauthservice.user;
+package com.generali.userauthservice.user.jpaspecification;
 
+import com.generali.userauthservice.user.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.LockModeType;
 import jakarta.persistence.PersistenceContext;

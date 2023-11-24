@@ -1,4 +1,4 @@
-package com.generali.userauthservice.user;
+package com.generali.userauthservice.user.jpaspecification;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

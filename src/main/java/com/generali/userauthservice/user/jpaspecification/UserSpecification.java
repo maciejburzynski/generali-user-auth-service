@@ -1,5 +1,8 @@
-package com.generali.userauthservice.user;
+package com.generali.userauthservice.user.jpaspecification;
 
+import com.generali.userauthservice.user.User;
+import com.generali.userauthservice.user.jpaspecification.SearchCriteria;
+import com.generali.userauthservice.user.jpaspecification.SearchOperation;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
@@ -17,7 +20,7 @@ public class UserSpecification implements Specification<User> {
         this.searchCriteriaList = new ArrayList<>();
     }
 
-    void add(SearchCriteria searchCriteria) {
+    public void add(SearchCriteria searchCriteria) {
         searchCriteriaList.add(searchCriteria);
     }
 
@@ -72,7 +75,6 @@ public class UserSpecification implements Specification<User> {
                 predicates.add(criteriaBuilder
                         .like(criteriaBuilder.lower(root.get(criteria.getKey())),
                                 criteria.getValue().toString().toLowerCase() + "%"));
-
             } else if (criteria.getSearchOperation().equals(SearchOperation.MATCH_END)) {
                 predicates.add(criteriaBuilder
                         .like(criteriaBuilder.lower(root.get(criteria.getKey())),
