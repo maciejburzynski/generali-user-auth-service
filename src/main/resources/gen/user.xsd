@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="/jaxb/gen"
+        xmlns:userns="/jaxb/gen"
+        elementFormDefault="qualified">
+    <element name="userExample" type="userns:UserExample"></element>
+
+    <complexType name="UserExample">
+        <sequence>
+            <element name="id" type="int" minOccurs="0"></element>
+            <element name="name" type="string" minOccurs="0"></element>
+        </sequence>
+    </complexType>
+</schema>

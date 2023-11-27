@@ -115,12 +115,18 @@
 				<version>3.1.0</version>
 				<executions>
 					<execution>
-						<id>schemagen</id>
+						<id>xjc</id>
 						<goals>
-							<goal>schemagen</goal>
+							<goal>xjc</goal>
 						</goals>
 					</execution>
 				</executions>
+				<configuration>
+					<sources>
+						<source>src/main/resources/gen</source>
+					</sources>
+					<outputDirectory>src/main/java/com/generali/userauthservice/gen</outputDirectory>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

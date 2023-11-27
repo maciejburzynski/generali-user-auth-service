@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<userList>
+    <user>
+        <username>user</username>
+        <mail>user@gmail.com</mail>
+    </user>
+    <user>
+        <username>admin</username>
+        <mail>user@gmail.com</mail>
+    </user>
+    <user>
+        <username>superadmin</username>
+        <mail>user@gmail.com</mail>
+    </user>
+</userList>
